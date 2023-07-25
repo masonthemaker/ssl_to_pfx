@@ -1,27 +1,29 @@
 import subprocess
 import os
-import secrets
-import string
 import time
+from getpass import getpass
 
-# Generate a secure random password
-alphabet = string.ascii_letters + string.digits
-password = ''.join(secrets.choice(alphabet) for _ in range(10))  # for a 10-character password
+# Ask the user to input a password
+password = getpass("Please enter a password: ")
 
 # Generate a unique filename based on the current timestamp
 timestamp = time.strftime("%Y%m%d-%H%M%S")
-password_file_path = rf"C:\Users\youruser\Desktop\SSL\password_{timestamp}.txt"
+
+# Ask the user for the paths to the certificate and key files
+crt_file_path = input("Please enter the full path to your certificate file: ")
+key_file_path = input("Please enter the full path to your key file: ")
+
+# Ask the user where to save the new .pfx file and password file
+pfx_file_dest = input("Please enter the full path where you want to save the new .pfx file: ")
+password_file_dest = input("Please enter the full path where you want to save the password file: ")
+
+# Generate the full file paths for the new .pfx file and password file
+pfx_file_path = os.path.join(pfx_file_dest, f"new_{timestamp}.pfx")
+password_file_path = os.path.join(password_file_dest, f"password_{timestamp}.txt")
 
 # Save the password to a file
 with open(password_file_path, "w") as file:
     file.write(password)
-
-# Define file paths
-crt_file_path = r"C:\Users\youruser\Desktop\SSL\yourcrtfile.crt"  # Your certificate file
-key_file_path = r"C:\Users\youruser\Desktop\SSL\yourrsafile.txt"  # Your private key file
-
-# Generate a unique filename for the .pfx file
-pfx_file_path = rf"C:\Users\youruser\Desktop\SSL\new_{timestamp}.pfx"
 
 # Add OpenSSL to your PATH within the Python script
 os.environ["PATH"] += os.pathsep + r'C:\Program Files\OpenSSL-Win64\bin'
