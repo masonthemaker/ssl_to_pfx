@@ -4,11 +4,11 @@
 
 This script is designed to automate the process of converting SSL certificates from .crt format to .pfx format using OpenSSL. This is particularly useful when you need to use the SSL certificates on platforms that require a .pfx format, such as Microsoft's IIS server.
 
-# version 1 only: The script also integrates a secure password generator for the .pfx certificate, enhancing security and ensuring that a unique password is generated each time a .pfx file is created.
+** version 1 only: The script also integrates a secure password generator for the .pfx certificate, enhancing security and ensuring that a unique password is generated each time a .pfx file is created.
 
 Key features include:
 
-# version 1 only Automatic password generation: The script generates a secure random password each time it runs. This password is then used to secure the .pfx certificate file.
+** version 1 only Automatic password generation: The script generates a secure random password each time it runs. This password is then used to secure the .pfx certificate file.
 
 Unique file naming: Each generated .pfx file and associated password file has a unique name, preventing overwriting of previous files and ensuring each certificate-password pair is distinct.
 
