@@ -1,5 +1,7 @@
 # ssl_to_pfx
 
+**This is my first python project**
+
 This script is designed to automate the process of converting SSL certificates from .crt format to .pfx format using OpenSSL. This is particularly useful when you need to use the SSL certificates on platforms that require a .pfx format, such as Microsoft's IIS server.
 
 The script also integrates a secure password generator for the .pfx certificate, enhancing security and ensuring that a unique password is generated each time a .pfx file is created.
