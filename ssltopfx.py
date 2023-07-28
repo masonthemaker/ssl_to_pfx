@@ -12,6 +12,27 @@ def generate_files():
     pfx_file_dest = pfx_dest_entry.get()
     password_file_dest = password_dest_entry.get()
 
+    # Validation of fields before executing the process
+    if not password:
+        display_message(1, "Password field is empty")
+        return
+
+    if not crt_file_path:
+        display_message(1, "Empty certificate file path")
+        return
+
+    if not key_file_path:
+        display_message(1, "Empty key file path")
+        return
+
+    if not pfx_file_dest:
+        display_message(1, "Empty PFX file destination")
+        return
+
+    if not password_file_dest:
+        display_message(1, "Empty password file destination")
+        return
+
     # Generate a unique filename based on the current timestamp
     timestamp = time.strftime("%Y%m%d-%H%M%S")
 
@@ -42,15 +63,30 @@ def generate_files():
         subprocess.run(command, check=True)
 
         # Display success message
-        messagebox.showinfo("Success", "Files successfully generated!")
+        # messagebox.showinfo("Success", "Files successfully generated!")
+        display_message(2, "Files successfully generated!")
     except Exception as e:
         # Display error message
-        messagebox.showerror("Error", str(e))
+        # messagebox.showerror("Error", str(e))
+        display_message(1, str(e))
 
 def browse_files(entry):
     filename = filedialog.askopenfilename()
     entry.delete(0, tk.END)
     entry.insert(0, filename)
+
+# Generic function to display error or info messages
+#
+# You can reuse this function in other parts of your code
+# by calling this function as display_message(level, message)
+# where level is 1 for error and 2 for info
+# and message is the message you want to display
+def display_message(level, message):
+    if level == 1:
+        messagebox.showerror("Error", message)
+
+    if level == 2:
+        messagebox.showinfo("Info", message)
 
 # Create the main window
 root = tk.Tk()
